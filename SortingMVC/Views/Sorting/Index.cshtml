@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SortingMVC.Entities.SortData>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Operations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="Searchsort" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AddressSortParm"]">@Html.DisplayNameFor(model => model.Address)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateJoined)</a>
+            </th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateJoined)
+            </td>
+            <td>
+                <Button style="height: 50px; width: 80px; padding: 5px; margin: 5px; background: #f5742f; border:none"> <a asp-action="Edit" asp-route-id="@item.Id" style="color: black; text-decoration: none;">Edit</a> </Button>
+                <Button style="height: 50px; width: 80px; padding: 5px; margin: 5px; background: #1e8a2e; border:none"><a asp-action="Details" asp-route-id="@item.Id" style="color: black; text-decoration: none;">Details</a> </Button>
+                <Button style="height: 50px; width: 80px; padding: 5px; margin: 5px; background: #b52e2b; border:none"><a asp-action="Delete" asp-route-id="@item.Id" style="color: black; text-decoration: none;">Delete</a> </Button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
